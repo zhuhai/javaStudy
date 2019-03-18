@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="zkStudy:war">
+    <output-path>$PROJECT_DIR$/zkStudy/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>zkStudy</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="zkStudy.war">
+      <element id="artifact" artifact-name="zkStudy:war exploded" />
+    </root>
+  </artifact>
+</component>
