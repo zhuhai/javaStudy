@@ -1,16 +1,11 @@
 package com.zhuhai.controller;
 
 import com.zhuhai.config.MyConfig2;
-import com.zhuhai.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA
@@ -42,7 +37,7 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping(value = "/user/info")
+    /*@GetMapping(value = "/user/info")
     public String getUser(Model model) {
         User user = new User();
         user.setUserName("张三");
@@ -82,5 +77,5 @@ public class IndexController {
         return "index";
 
 
-    }
+    }*/
 }

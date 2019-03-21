@@ -2,6 +2,8 @@ package com.zhuhai.entity;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * Created with IntelliJ IDEA
  * Date: 2019/3/19
@@ -11,11 +13,12 @@ import lombok.Data;
  */
 @Data
 public class User {
-
+    private Integer id;
     private String userName;
     private Integer age;
     private String sex;
     private String email;
-
+    private String password;
+    private Date createTime;
 
 }

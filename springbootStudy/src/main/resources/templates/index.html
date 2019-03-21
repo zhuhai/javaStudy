@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <h1 th:text="'Hello，' + ${name == null ? '' : name}">你好</h1>
+    <h1 th:text="${'Hello,' + name}">你好</h1>
     <table class="table">
         <theader>
             <tr>
@@ -19,7 +19,7 @@
                 <th>邮箱</th>
             </tr>
         </theader>
-        <tbody>
+        <tbody th:remove="all-but-first">
         <!--<tr>
             <td th:text="${user.userName}"></td>
             <td th:text="${user.age}"></td>
@@ -35,12 +35,33 @@
         <!--<tr>
             <td th:text="${#lists.size(userList)}"></td>
         </tr>-->
-        <tr th:each="user:${userList}">
+        <tr th:each="user, userStat:${userList}">
+            <!--<td th:text="${userStat.count}"></td>-->
+            <td th:style="${user.sex eq '女'} ? 'color:red'" th:text="${user.userName}">test</td>
+            <td th:text="${user.age}">20</td>
+            <td th:text="${user.sex}">女</td>
+            <td th:text="${user.email}">test@qq.com</td>
+        </tr>
+        <!--<tr th:each="user:${userList}">
+            <td th:text="${userStat.count}"></td>
             <td th:text="${user.userName}"></td>
             <td th:text="${user.age}"></td>
             <td th:text="${user.sex}"></td>
             <td th:text="${user.email}"></td>
+        </tr>-->
+        <tr>
+            <td>张三</td>
+            <td>20</td>
+            <td>男</td>
+            <td>zhangsan@163.com</td>
         </tr>
+        <tr>
+            <td>张三</td>
+            <td>20</td>
+            <td>男</td>
+            <td>zhangsan@163.com</td>
+        </tr>
+
         </tbody>
     </table>
 
