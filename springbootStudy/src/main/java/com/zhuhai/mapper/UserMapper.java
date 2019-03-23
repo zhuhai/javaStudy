@@ -1,4 +1,4 @@
-package com.zhuhai.service;
+package com.zhuhai.mapper;
 
 import com.zhuhai.entity.User;
 
@@ -6,17 +6,14 @@ import java.util.List;
 
 /**
  * Created with IntelliJ IDEA
- * Date: 2019/3/21
- * Time: 22:35
+ * Date: 2019/3/23
+ * Time: 13:30
  *
  * @author: hai
  */
-public interface UserService {
+public interface UserMapper {
 
-
-    User insertUser(User user);
-
-    List<User> listUser();
+    int insertUser(User user);
 
     List<User> findAll();
 

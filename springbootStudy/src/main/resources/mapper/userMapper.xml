@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.zhuhai.mapper.UserMapper">
+
+    <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_user(id,username,password) values(#{id},#{userName},#{password});
+    </insert>
+
+    <select id="findAll" resultType="User">
+        select * from sys_user;
+    </select>
+
+    <select id="findById" resultType="User">
+        select * from sys_user where id = #{id};
+    </select>
+
+</mapper>
