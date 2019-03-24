@@ -1,7 +1,8 @@
 package com.zhuhai.service.impl;
 
-import com.zhuhai.entity.User;
+import com.github.pagehelper.PageHelper;
 import com.zhuhai.mapper.UserMapper;
+import com.zhuhai.pojo.User;
 import com.zhuhai.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -27,6 +28,7 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
 
+
     @Override
     public User insertUser(User user) {
         userMapper.insertUser(user);
@@ -42,6 +44,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll() {
+        PageHelper.startPage(1,1);
         return userMapper.findAll();
     }
 

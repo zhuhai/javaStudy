@@ -1,4 +1,4 @@
-package com.zhuhai.entity;
+package com.zhuhai.pojo;
 
 import lombok.Data;
 

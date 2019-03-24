@@ -1,6 +1,6 @@
 package com.zhuhai.service;
 
-import com.zhuhai.entity.User;
+import com.zhuhai.pojo.User;
 
 import java.util.List;
 

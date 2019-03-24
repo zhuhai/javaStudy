@@ -1,6 +1,6 @@
 package com.zhuhai.controller;
 
-import com.zhuhai.entity.User;
+import com.zhuhai.pojo.User;
 import com.zhuhai.service.UserService;
 import com.zhuhai.vo.UserVO;
 import org.springframework.beans.BeanUtils;

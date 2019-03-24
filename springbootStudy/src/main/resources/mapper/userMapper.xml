@@ -8,11 +8,11 @@
     </insert>
 
     <select id="findAll" resultType="User">
-        select * from sys_user;
+        select * from sys_user
     </select>
 
     <select id="findById" resultType="User">
-        select * from sys_user where id = #{id};
+        select * from sys_user where id = #{id}
     </select>
 
 </mapper>
