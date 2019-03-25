@@ -9,9 +9,12 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.io.Serializable;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -23,6 +26,12 @@ public class SpringbootStudyApplicationTests {
     private UserMapper userMapper;
     @Resource
     private SysUserMapper sysUserMapper;
+
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
+
+    @Resource
+    private RedisTemplate<String, Serializable> redisCacheTemplate;
 
     @Test
     public void test1() {
@@ -51,6 +60,27 @@ public class SpringbootStudyApplicationTests {
         for (SysUser sysUser : sysUserList) {
             System.out.println(sysUser.getUsername());
         }*/
+    }
+
+    @Test
+    public void testRedis() {
+        //stringRedisTemplate.opsForValue().set("stringRedisKey", "stringRedisValue");
+        //redisCacheTemplate.opsForValue().set("stringRedisKey2", "stringRedisValue2");
+        //String value = (String) redisCacheTemplate.opsForValue().get("stringRedisKey2");
+        User user = new User();
+        user.setId(1);
+        user.setUserName("张三");
+        user.setAge(26);
+        //redisCacheTemplate.opsForValue().set("user", user);
+        //User value = (User)redisCacheTemplate.opsForValue().get("user");
+        //System.out.println(value.toString());
+
+        for (int i = 0; i < 1000; i++) {
+            //stringRedisTemplate.opsForValue().increment("incrTest");
+            redisCacheTemplate.opsForValue().increment("incrTest2");
+        }
+
+
     }
 
 }
