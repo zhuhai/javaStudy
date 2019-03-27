@@ -221,5 +221,24 @@ public class RedisUtil {
         return (T) redisCacheTemplate.opsForList().rightPop(key);
     }
 
+    /**
+     * 实现命令 SADD key value[value...] 将一个或多个元素添加到集合key中
+     * @param key
+     * @param values
+     * @return
+     */
+    public long sadd(String key, Serializable...values) {
+        return redisCacheTemplate.opsForSet().add(key, values);
+    }
+
+    /**
+     * 实现命令 SMEMBERS KEY 返回集合key中的所有元素
+     * @param key
+     * @param <T>
+     * @return
+     */
+    public <T> Set<T> smembers(String key) {
+        return (Set<T>) redisCacheTemplate.opsForSet().members(key);
+    }
 
 }
