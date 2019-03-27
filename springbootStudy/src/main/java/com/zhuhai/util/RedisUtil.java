@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -128,5 +129,97 @@ public class RedisUtil {
     public <T> T get(String key) {
         return (T) redisCacheTemplate.opsForValue().get(key);
     }
+
+
+    /**
+     * 实现命令 hset key field value
+     * @param key
+     * @param filed
+     * @param value
+     */
+    public void hset(String key, String filed, Serializable value) {
+        redisCacheTemplate.opsForHash().put(key, filed, value);
+    }
+
+    /**
+     * 实现命令 hget key field
+     * @param key
+     * @param filed
+     * @param <T>
+     * @return
+     */
+    public <T> T hget(String key, String filed) {
+        return (T) redisCacheTemplate.opsForHash().get(key, filed);
+    }
+
+    /**
+     * 实现命令 hdel key field[field...]
+     * @param key
+     * @param fields
+     */
+    public void hdel(String key, String...fields) {
+        redisCacheTemplate.opsForHash().delete(key, fields);
+    }
+
+    /**
+     * 实现命令 hgetAll key
+     * @param key
+     * @return
+     */
+    public Map<Object, Object> hgetAll(String key) {
+        return redisCacheTemplate.opsForHash().entries(key);
+    }
+
+    /**
+     * 实现命令 HEXISTS key field
+     * @param key
+     * @param field
+     * @return
+     */
+    public boolean hexists(String key, String field) {
+        return redisCacheTemplate.opsForHash().hasKey(key, field);
+    }
+
+
+    /**
+     * 实现命令 LPUSH key value 将value插入到列表key的表头
+     * @param key
+     * @param value
+     * @return 列表的长度
+     */
+    public long lpush(String key, Serializable value) {
+        return redisCacheTemplate.opsForList().leftPush(key, value);
+    }
+
+
+    /**
+     * 实现命令 LPOP key 移除并返回列表的头元素
+     * @param key
+     * @return
+     */
+    public <T> T lpop(String key) {
+        return (T) redisCacheTemplate.opsForList().leftPop(key);
+    }
+
+    /**
+     * 实现命令RPUSH key value 将value插入到列表key的表尾
+     * @param key
+     * @param value
+     * @return 列表的长度
+     */
+    public long rpush(String key, Serializable value) {
+        return redisCacheTemplate.opsForList().rightPush(key, value);
+    }
+
+    /**
+     * 实现命令 RPOP key 移除并返回列表的尾元素
+     * @param key
+     * @param <T>
+     * @return
+     */
+    public <T> T rpop(String key) {
+        return (T) redisCacheTemplate.opsForList().rightPop(key);
+    }
+
 
 }

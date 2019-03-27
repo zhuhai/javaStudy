@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.zhuhai.mapper.SysUserMapper;
 import com.zhuhai.mapper.UserMapper;
 import com.zhuhai.pojo.User;
+import com.zhuhai.util.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
@@ -32,6 +33,9 @@ public class SpringbootStudyApplicationTests {
 
     @Resource
     private RedisTemplate<String, Serializable> redisCacheTemplate;
+
+    @Resource
+    private RedisUtil redisUtil;
 
     @Test
     public void test1() {
@@ -67,19 +71,20 @@ public class SpringbootStudyApplicationTests {
         //stringRedisTemplate.opsForValue().set("stringRedisKey", "stringRedisValue");
         //redisCacheTemplate.opsForValue().set("stringRedisKey2", "stringRedisValue2");
         //String value = (String) redisCacheTemplate.opsForValue().get("stringRedisKey2");
-        User user = new User();
+        /*User user = new User();
         user.setId(1);
         user.setUserName("张三");
-        user.setAge(26);
+        user.setAge(26);*/
         //redisCacheTemplate.opsForValue().set("user", user);
         //User value = (User)redisCacheTemplate.opsForValue().get("user");
         //System.out.println(value.toString());
 
-        for (int i = 0; i < 1000; i++) {
+        /*for (int i = 0; i < 1000; i++) {
             //stringRedisTemplate.opsForValue().increment("incrTest");
             redisCacheTemplate.opsForValue().increment("incrTest2");
-        }
-
+        }*/
+        User user = redisUtil.get("user");
+        System.out.println(user.toString());
 
     }
 
