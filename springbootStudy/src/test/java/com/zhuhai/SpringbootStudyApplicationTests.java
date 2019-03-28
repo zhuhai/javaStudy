@@ -1,5 +1,4 @@
 package com.zhuhai;
-
 import com.github.pagehelper.PageHelper;
 import com.zhuhai.mapper.SysUserMapper;
 import com.zhuhai.mapper.UserMapper;
@@ -83,8 +82,22 @@ public class SpringbootStudyApplicationTests {
             //stringRedisTemplate.opsForValue().increment("incrTest");
             redisCacheTemplate.opsForValue().increment("incrTest2");
         }*/
-        User user = redisUtil.get("user");
-        System.out.println(user.toString());
+        //redisUtil.sadd("testSet", "aa","bb");
+        /*User user = new User();
+        user.setId(1);
+        user.setUserName("张三");
+        user.setAge(20);
+        user.setSex("男");
+        user.setEmail("zhangsan@163.com");
+        user.setPassword("123456");
+        user.setCreateTime(new Date());
+        redisUtil.sadd("user", user);*/
+        /*Set<User> users = redisUtil.smembers("user");
+        for (User user : users) {
+            System.out.println(user);
+        }*/
+        System.out.println(redisUtil.zadd("test2", "test2", 12.2));
+
 
     }
 

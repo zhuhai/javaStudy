@@ -88,7 +88,7 @@ public class RedisUtil {
      * @param key
      * @return
      */
-    public boolean del(String key) {
+    public Boolean del(String key) {
         return redisCacheTemplate.delete(key);
     }
 
@@ -97,7 +97,7 @@ public class RedisUtil {
      * @param keys
      * @return
      */
-    public long del(Set<String> keys) {
+    public Long del(Set<String> keys) {
         return redisCacheTemplate.delete(keys);
     }
 
@@ -176,7 +176,7 @@ public class RedisUtil {
      * @param field
      * @return
      */
-    public boolean hexists(String key, String field) {
+    public Boolean hexists(String key, String field) {
         return redisCacheTemplate.opsForHash().hasKey(key, field);
     }
 
@@ -187,7 +187,7 @@ public class RedisUtil {
      * @param value
      * @return 列表的长度
      */
-    public long lpush(String key, Serializable value) {
+    public Long lpush(String key, Serializable value) {
         return redisCacheTemplate.opsForList().leftPush(key, value);
     }
 
@@ -207,7 +207,7 @@ public class RedisUtil {
      * @param value
      * @return 列表的长度
      */
-    public long rpush(String key, Serializable value) {
+    public Long rpush(String key, Serializable value) {
         return redisCacheTemplate.opsForList().rightPush(key, value);
     }
 
@@ -227,7 +227,7 @@ public class RedisUtil {
      * @param values
      * @return
      */
-    public long sadd(String key, Serializable...values) {
+    public Long sadd(String key, Serializable...values) {
         return redisCacheTemplate.opsForSet().add(key, values);
     }
 
@@ -240,5 +240,30 @@ public class RedisUtil {
     public <T> Set<T> smembers(String key) {
         return (Set<T>) redisCacheTemplate.opsForSet().members(key);
     }
+
+    /**
+     * 实现命令 SREM KEY value[value...]
+     * @param key
+     * @param values
+     * @return
+     */
+    public Long srem(String key, Serializable...values) {
+        return redisCacheTemplate.opsForSet().remove(key, values);
+    }
+
+    /**
+     * 实现命令 SCARD key 返回集合key的元素数量
+     * @param key
+     * @return
+     */
+    public Long scard(String key) {
+        return redisCacheTemplate.opsForSet().size(key);
+    }
+
+
+    public Boolean zadd(String key, Serializable value, double score) {
+        return redisCacheTemplate.opsForZSet().add(key, value, score);
+    }
+
 
 }
