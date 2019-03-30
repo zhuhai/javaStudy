@@ -261,9 +261,137 @@ public class RedisUtil {
     }
 
 
+    /**
+     * 实现命令ZADD KEY SCORE MEMBER 将元素member及其score加入到有序集合key中
+     * @param key
+     * @param value
+     * @param score
+     * @return
+     */
     public Boolean zadd(String key, Serializable value, double score) {
         return redisCacheTemplate.opsForZSet().add(key, value, score);
     }
 
+    /**
+     * 实现命令ZSCORE KEY MEMBER 返回有序集合key中元素member的score值
+     * @param key
+     * @param value
+     * @return
+     */
+    public Double zscore(String key, Serializable value) {
+        return redisCacheTemplate.opsForZSet().score(key, value);
+    }
 
+    /**
+     * 实现命令ZCARD KEY 返回有序集合key中的元素数量
+     * @param key
+     * @return
+     */
+    public Long zcard(String key) {
+        return redisCacheTemplate.opsForZSet().zCard(key);
+    }
+
+    /**
+     * 实现命令ZCOUNT KEY min max 返回有序集合key中元素score在min和max之间（包含min和max）的数量
+     * @param key
+     * @param min
+     * @param max
+     * @return
+     */
+    public Long zcount(String key, double min, double max) {
+        return redisCacheTemplate.opsForZSet().count(key, min, max);
+    }
+
+    /**
+     * 实现命令ZRANGE KEY start end 返回有序集合key中指定区间的元素，成员位置按照score值递增排序
+     * @param key
+     * @param start
+     * @param end
+     * @param <T>
+     * @return
+     */
+    public <T> Set<T> zrange(String key, long start, long end) {
+        return (Set<T>) redisCacheTemplate.opsForZSet().range(key, start, end);
+    }
+
+    /**
+     * 实现命令ZREVRANGE KEY start end 返回有序集合key中指定区间的元素，成员位置按照score值递减排序
+     * @param key
+     * @param start
+     * @param end
+     * @param <T>
+     * @return
+     */
+    public <T> Set<T> zrevRange(String key, long start, long end) {
+        return (Set<T>) redisCacheTemplate.opsForZSet().reverseRange(key, start, end);
+    }
+
+    /**
+     * 实现命令ZRANGEBYSCORE key min max 返回有序集key中，所有score值介于min和max之间(包括min,max)的成员。有序集成员按score值递增排列。
+     * @param key
+     * @param min
+     * @param max
+     * @param <T>
+     * @return
+     */
+    public <T> Set<T> zrangeByScore(String key, double min, double max) {
+        return (Set<T>) redisCacheTemplate.opsForZSet().rangeByScore(key, min, max);
+    }
+
+    /**
+     * 实现命令ZRANK key member 返回有序集合key中元素member的排名，排名按scroe值递增排序，排名从0开始
+     * @param key
+     * @param member
+     * @return
+     */
+    public Long zrank(String key, Serializable member) {
+        return redisCacheTemplate.opsForZSet().rank(key, member);
+
+    }
+
+
+    /**
+     * 实现命令ZREVRANK key member 返回有序集合key中元素member的排名，排名按scroe值递减排序，排名从0开始
+     * @param key
+     * @param member
+     * @return
+     */
+    public Long zrevRank(String key, Serializable member) {
+        return redisCacheTemplate.opsForZSet().reverseRank(key, member);
+
+    }
+
+    /**
+     * 实现命令ZREM key member[member...] 删除有序集合key中指定的元素member
+     * @param key
+     * @param members
+     * @return
+     */
+    public Long zrem(String key, Serializable...members) {
+        return redisCacheTemplate.opsForZSet().remove(key, members);
+    }
+
+
+    /**
+     * 实现命令ZREMRANGEBYRANK key start end 移除有序集key中，指定排名(rank)区间内的所有成员。
+     * @param key
+     * @param start
+     * @param end
+     * @return
+     */
+    public Long zremRangeByRank(String key, long start, long end) {
+        return redisCacheTemplate.opsForZSet().removeRange(key, start, end);
+    }
+
+
+    /**
+     * 实现命令ZREMRANGEBYSCORE key min max 移除有序集合key中，所有score值介于min和max之间（包含min和max）的元素
+     * @param key
+     * @param min
+     * @param max
+     * @return
+     */
+    public Long zremRangeByScore(String key, double min, double max) {
+        return redisCacheTemplate.opsForZSet().removeRangeByScore(key, min, max);
+    }
 }

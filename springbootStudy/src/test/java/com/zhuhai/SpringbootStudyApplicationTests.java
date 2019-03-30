@@ -96,7 +96,10 @@ public class SpringbootStudyApplicationTests {
         for (User user : users) {
             System.out.println(user);
         }*/
-        System.out.println(redisUtil.zadd("test2", "test2", 12.2));
+        redisUtil.zadd("test", "test", 12.2);
+        redisUtil.zadd("test", "test2", 11.0);
+        redisUtil.zadd("test", "test3", 13.5);
+        redisUtil.zadd("test", "test4", 10);
 
 
     }
