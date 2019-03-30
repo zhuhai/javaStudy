@@ -4,7 +4,10 @@ import com.github.pagehelper.PageHelper;
 import com.zhuhai.mapper.UserMapper;
 import com.zhuhai.pojo.User;
 import com.zhuhai.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,7 @@ import java.util.List;
  * @author: hai
  */
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -29,8 +33,10 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
 
+    @CachePut(value = "user", key = "#user.id")
     @Override
     public User insertUser(User user) {
+        log.info("进入insert方法");
         userMapper.insertUser(user);
         return user;
     }
@@ -48,8 +54,12 @@ public class UserServiceImpl implements UserService {
         return userMapper.findAll();
     }
 
+    @Cacheable(value = "user", key = "#id")
     @Override
     public User findById(Long id) {
+        log.info("进入get方法");
         return userMapper.findById(id);
     }
+
+
 }

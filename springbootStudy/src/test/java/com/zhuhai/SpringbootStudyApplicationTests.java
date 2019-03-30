@@ -3,6 +3,7 @@ import com.github.pagehelper.PageHelper;
 import com.zhuhai.mapper.SysUserMapper;
 import com.zhuhai.mapper.UserMapper;
 import com.zhuhai.pojo.User;
+import com.zhuhai.service.UserService;
 import com.zhuhai.util.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -15,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -36,9 +38,12 @@ public class SpringbootStudyApplicationTests {
     @Resource
     private RedisUtil redisUtil;
 
+    @Resource
+    private UserService userService;
+
     @Test
     public void test1() {
-        User user = userMapper.findById(1L);
+        User user = userService.findById(1L);
         log.info("user is {}", user);
         Assert.assertNotNull(user);
     }
@@ -46,9 +51,10 @@ public class SpringbootStudyApplicationTests {
     @Test
     public void testInsertUser() {
         User user = new User();
-        user.setUserName("王五3");
+        user.setUserName("王五");
         user.setPassword("123456");
-        userMapper.insertUser(user);
+        user.setCreateTime(new Date());
+        userService.insertUser(user);
         log.info("保存的user id为：{}", user.getId());
     }
 
