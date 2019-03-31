@@ -6,6 +6,7 @@ import com.zhuhai.pojo.User;
 import com.zhuhai.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -61,5 +62,9 @@ public class UserServiceImpl implements UserService {
         return userMapper.findById(id);
     }
 
-
+    @CacheEvict(value = "user", key = "#id")
+    @Override
+    public void deleteUser(Long id) {
+        log.info("删除用户");
+    }
 }

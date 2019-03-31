@@ -157,7 +157,7 @@ public class RedisUtil {
      * @param key
      * @param fields
      */
-    public void hdel(String key, String...fields) {
+    public void hdel(String key, Object...fields) {
         redisCacheTemplate.opsForHash().delete(key, fields);
     }
 
@@ -227,7 +227,7 @@ public class RedisUtil {
      * @param values
      * @return
      */
-    public Long sadd(String key, Serializable...values) {
+    public Long sadd(String key, Object...values) {
         return redisCacheTemplate.opsForSet().add(key, values);
     }
 
@@ -247,7 +247,7 @@ public class RedisUtil {
      * @param values
      * @return
      */
-    public Long srem(String key, Serializable...values) {
+    public Long srem(String key, Object...values) {
         return redisCacheTemplate.opsForSet().remove(key, values);
     }
 
@@ -367,7 +367,7 @@ public class RedisUtil {
      * @param members
      * @return
      */
-    public Long zrem(String key, Serializable...members) {
+    public Long zrem(String key, Object...members) {
         return redisCacheTemplate.opsForZSet().remove(key, members);
     }
 
