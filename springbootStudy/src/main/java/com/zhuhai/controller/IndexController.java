@@ -24,7 +24,7 @@ public class IndexController {
     @Autowired
     private MyConfig2 myConfig2;
 
-    @RequestMapping("/")
+    @RequestMapping("/index2")
     public String index(Model model) {
 
         /*log.info("my name is {}", myConfig.getName());
