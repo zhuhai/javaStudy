@@ -1,7 +1,10 @@
 package com.zhuhai.controller;
 
+import com.zhuhai.exception.BusinessException;
+import com.zhuhai.exception.EnumBusinessError;
 import com.zhuhai.pojo.User;
 import com.zhuhai.service.UserService;
+import com.zhuhai.vo.ResultBean;
 import com.zhuhai.vo.UserVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,10 +56,13 @@ public class UserController {
 
     @RequestMapping("/{id}/info")
     @ResponseBody
-    public UserVO findUserById(@PathVariable("id") Long id) {
+    public ResultBean findUserById(@PathVariable("id") Long id) {
+        if (id == 1) {
+            throw new BusinessException(EnumBusinessError.USER_NOT_EXIST);
+        }
         User user = userService.findById(id);
         UserVO userVO = new UserVO();
         BeanUtils.copyProperties(user, userVO);
-        return userVO;
+        return ResultBean.success(userVO);
     }
 }

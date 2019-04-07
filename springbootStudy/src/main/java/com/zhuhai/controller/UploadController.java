@@ -44,4 +44,21 @@ public class UploadController {
         return "upload";
     }
 
+    @PostMapping(value = "/upload2")
+    public String upload2(@RequestParam("file") MultipartFile[] files) throws IOException {
+        for (MultipartFile file : files) {
+            log.info("file name is:{}", file.getOriginalFilename());
+            log.info("file size is:{}", file.getSize());
+            log.info("file type is:{}", file.getContentType());
+            String path = "D:/upload/img";
+            File dir = new File(path);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            File uploadFile = new File(dir,file.getOriginalFilename());
+            file.transferTo(uploadFile);
+        }
+        return "upload";
+    }
+
 }
