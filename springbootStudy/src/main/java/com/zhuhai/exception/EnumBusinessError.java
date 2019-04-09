@@ -8,9 +8,10 @@ package com.zhuhai.exception;
  * @author: hai
  */
 public enum EnumBusinessError implements CommonError {
+    SUCCESS(1, "success"),
     PARAMETER_VALIDATION_ERROR(10000, "参数不合法"),
     SYSTEM_ERROR(99999, "未知错误"),
-    USER_NOT_EXIST(10001, "用户不存在");
+    USER_NOT_EXIST(20001, "用户不存在");
 
 
 

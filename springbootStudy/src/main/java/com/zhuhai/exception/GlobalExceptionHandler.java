@@ -22,7 +22,6 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public ResultBean handler(Exception ex) {
-        System.out.println(ex.getMessage());
         if (ex instanceof BusinessException) {
             BusinessException businessException = (BusinessException) ex;
             return ResultBean.error(businessException);

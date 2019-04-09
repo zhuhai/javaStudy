@@ -1,6 +1,7 @@
 package com.zhuhai.vo;
 
 import com.zhuhai.exception.CommonError;
+import com.zhuhai.exception.EnumBusinessError;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -23,15 +24,13 @@ public class ResultBean implements Serializable {
 
     public static ResultBean success() {
         ResultBean resultBean = new ResultBean();
-        resultBean.setCode(1);
-        resultBean.setMessage("success");
+        resultBean.setResultCode(EnumBusinessError.SUCCESS);
         return resultBean;
     }
 
     public static ResultBean success(Object data) {
         ResultBean resultBean = new ResultBean();
-        resultBean.setCode(1);
-        resultBean.setMessage("success");
+        resultBean.setResultCode(EnumBusinessError.SUCCESS);
         resultBean.setData(data);
 
         return resultBean;
@@ -39,10 +38,14 @@ public class ResultBean implements Serializable {
 
     public static ResultBean error(CommonError commonError) {
         ResultBean resultBean = new ResultBean();
-        resultBean.setCode(commonError.getCode());
-        resultBean.setMessage(commonError.getMessage());
+        resultBean.setResultCode(commonError);
         return resultBean;
 
+    }
+
+    private void setResultCode(CommonError commonError) {
+        this.code = commonError.getCode();
+        this.message = commonError.getMessage();
     }
 
 
